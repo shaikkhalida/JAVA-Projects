@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class Project {
+    public static Scanner input = new Scanner(System.in);
+    public static String again;
+    public static int choose, kilometers = 1;
+    public static double total = 0, pay;
+
+    public static void menu() {
+        System.out.println("****");
+        System.out.println("    WELCOME TO CANYA CAB TRAVELS BOOKING     ");
+        System.out.println("           MENU CARD        ");
+        System.out.println("(1) 1 Member : Rs.150 per km");
+        System.out.println("(2) 2 Members : Rs.350 per km");
+        System.out.println("(3) 1 Member with AC : Rs.300 per km");
+        System.out.println("(4) 2 Members with AC : Rs.700 per km");
+        System.out.println("(5) Top End Car : Rs.1000 per km");
+        System.out.println("(6) More than 3 Members: Rs.1200 per km");
+        System.out.println("(7) Cancel");
+        System.out.println("  ==============================================  ");
+    }
+
+    public static void order() {
+        System.out.println("Press 1 for 1 Member, Press 2 for 2 Members, Press 3 for 1 Member with AC, Press 4 for 2 Members with AC, Press 5 for Top End Car, Press 6 for More than 3 Members, Press 7 to Cancel");
+        System.out.print("Press the number for your booking choice: ");
+        choose = input.nextInt();
+
+        if (choose >= 1 && choose <= 6) {
+            System.out.print("How many kilometers do you want to travel? : ");
+            kilometers = input.nextInt();
+
+            switch (choose) {
+                case 1:
+                    total += kilometers * 150;
+                    break;
+                case 2:
+                    total += kilometers * 350;
+                    break;
+                case 3:
+                    total += kilometers * 300;
+                    break;
+                case 4:
+                    total += kilometers * 700;
+                    break;
+                case 5:
+                    total += kilometers * 1000;
+                    break;
+                case 6:
+                    total += kilometers * 1200;
+                    break;
+                default:
+                    break;
+            }
+
+            System.out.println("** THANK YOU FOR SELECTING KANYA CABS, WILL YOU TRAVEL AGAIN? * ");
+            System.out.println("Press Y for Yes and N for No: ");
+            again = input.next();
+
+            if (again.equalsIgnoreCase("Y")) {
+                order();
+            } else {
+                System.out.println("Total price for " + kilometers + " kilometers is Rs. " + total);
+                System.out.print("Enter payment amount: ");
+                pay = input.nextDouble();
+                if (pay < total) {
+                    System.out.println("Not enough payment.\n You paid Rs. " + pay + " but the total is Rs. " + total + ". \n You need to pay an additional Rs. " + (total - pay) + ".\n Your order is canceled.");
+                } else {
+                    System.out.println("Total price is Rs. " + total);
+                    double change = pay - total;
+                    System.out.println("The change is Rs. " + change);
+                }
+            }
+        } else if (choose == 7) {
+            System.exit(0);
+        } else {
+            System.out.println("Choose between 1 to 7 only!");
+            order();
+        }
+    }
+
+    public static void main(String[] args) {
+        menu();
+        order();
+    }
+}
