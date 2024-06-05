@@ -131,7 +131,7 @@ class Methods
 }
 
 //main method
-public class Project3 
+public class GymManagementSystem 
 {
 	public static void main(String[] args)
 	{   
